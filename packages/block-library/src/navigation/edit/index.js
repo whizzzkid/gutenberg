@@ -503,7 +503,6 @@ function Navigation( {
 				<InspectorControls>
 					{ hasSubmenuIndicatorSetting && (
 						<PanelBody title={ __( 'Display' ) }>
-							<h3>{ __( 'Overlay Menu' ) }</h3>
 							{ isResponsive && (
 								<Button
 									className={ overlayMenuPreviewClasses }
@@ -531,6 +530,7 @@ function Navigation( {
 									checked={ useIcon }
 								/>
 							) }
+							<h3>{ __( 'Overlay Menu' ) }</h3>
 							<ToggleGroupControl
 								label={ __( 'Configure overlay menu' ) }
 								value={ overlayMenu }
