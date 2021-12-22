@@ -26,7 +26,7 @@ import {
 	getGradientValueBySlug,
 	getGradientSlugByValue,
 } from '../components/gradients';
-import { cleanEmptyObject } from './utils';
+import { cleanEmptyObject, transformStyles } from './utils';
 import ColorPanel from './color-panel';
 import useSetting from '../components/use-setting';
 
@@ -484,6 +484,27 @@ export const withColorPaletteStyles = createHigherOrderComponent(
 	}
 );
 
+const MIGRATION_PATHS = {
+	linkColor: [ [ 'style', 'elements', 'link', 'color', 'text' ] ],
+	textColor: [ [ 'textColor' ], [ 'style', 'color', 'text' ] ],
+	backgroundColor: [
+		[ 'backgroundColor' ],
+		[ 'style', 'color', 'background' ],
+	],
+	gradient: [ [ 'gradient' ], [ 'style', 'color', 'gradient' ] ],
+};
+
+export function addTransforms( result, source ) {
+	const destinationBlockType = result.name;
+	const activeSupports = {
+		linkColor: hasLinkColorSupport( destinationBlockType ),
+		textColor: hasTextColorSupport( destinationBlockType ),
+		backgroundColor: hasBackgroundColorSupport( destinationBlockType ),
+		gradient: hasGradientSupport( destinationBlockType ),
+	};
+	return transformStyles( activeSupports, MIGRATION_PATHS, result, source );
+}
+
 addFilter(
 	'blocks.registerBlockType',
 	'core/color/addAttribute',
@@ -506,4 +527,10 @@ addFilter(
 	'editor.BlockListBlock',
 	'core/color/with-color-palette-styles',
 	withColorPaletteStyles
+);
+
+addFilter(
+	'blocks.switchToBlockType.transformedBlock',
+	'core/color/addTransforms',
+	addTransforms
 );
