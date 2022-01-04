@@ -31,7 +31,8 @@ function useUniqueId( idProp?: string ) {
 }
 
 export interface SelectControlProps
-	extends Omit< InputBaseProps, 'isFocused' > {
+	extends Omit< InputBaseProps, 'isFocused' | 'children' > {
+	children?: React.ReactNode;
 	help?: string;
 	hideLabelFromVision?: boolean;
 	multiple?: boolean;
