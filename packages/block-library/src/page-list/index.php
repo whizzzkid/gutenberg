@@ -177,7 +177,7 @@ function block_core_page_list_render_nested_page_list( $open_submenus_on_click, 
 		$aria_label = sprintf(
 			/* translators: Accessibility text. %s: Parent page title. */
 			__( '%s submenu' ),
-			$title
+			wp_strip_all_tags( $title )
 		);
 
 		$markup .= '<li class="wp-block-pages-list__item' . $css_class . '"' . $style_attribute . '>';
@@ -231,7 +231,7 @@ function block_core_page_list_nest_pages( $current_level, $children ) {
  * Renders the `core/page-list` block on server.
  *
  * @param array    $attributes The block attributes.
- * @param array    $content    The saved content.
+ * @param string   $content    The saved content.
  * @param WP_Block $block      The parsed block.
  *
  * @return string Returns the page list markup.
