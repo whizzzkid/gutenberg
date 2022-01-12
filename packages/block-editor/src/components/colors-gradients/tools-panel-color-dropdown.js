@@ -7,6 +7,7 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import {
+	Button,
 	ColorIndicator,
 	Dropdown,
 	FlexItem,
@@ -32,6 +33,7 @@ export default function ToolsPanelColorDropdown( { settings, ...otherProps } ) {
 		colorValue: settings.colorValue,
 		gradientValue: settings.gradientValue,
 	};
+	const selectedColor = settings.gradientValue ?? settings.colorValue;
 
 	return (
 		<ToolsPanelItem
@@ -41,37 +43,40 @@ export default function ToolsPanelColorDropdown( { settings, ...otherProps } ) {
 			isShownByDefault={ settings.isShownByDefault }
 			resetAllFilter={ settings.resetAllFilter }
 			{ ...otherProps }
-			as={ Dropdown }
-			className="block-editor-panel-color-gradient-settings__dropdown block-editor-tools-panel-color-dropdown"
-			contentClassName="block-editor-panel-color-gradient-settings__dropdown-content"
-			renderToggle={ ( { isOpen, onToggle } ) => (
-				<Item
-					onClick={ onToggle }
-					className={ classnames(
-						'block-editor-panel-color-gradient-settings__item',
-						{ 'is-open': isOpen }
-					) }
-				>
-					<HStack justify="flex-start">
-						<ColorIndicator
-							className="block-editor-panel-color-gradient-settings__color-indicator"
-							colorValue={
-								settings.gradientValue ?? settings.colorValue
-							}
-						/>
-						<FlexItem>{ settings.label }</FlexItem>
-					</HStack>
-				</Item>
-			) }
-			renderContent={ () => (
-				<ColorGradientControl
-					showTitle={ false }
-					__experimentalHasMultipleOrigins
-					__experimentalIsRenderedInSidebar
-					enableAlpha
-					{ ...controlSettings }
-				/>
-			) }
-		/>
+			as={ Item }
+			className="block-editor-tools-panel-color-gradient-settings__item"
+		>
+			<Dropdown
+				className="block-editor-tools-panel-color-dropdown"
+				contentClassName="block-editor-panel-color-gradient-settings__dropdown-content"
+				renderToggle={ ( { isOpen, onToggle } ) => (
+					<Button
+						onClick={ onToggle }
+						aria-expanded={ isOpen }
+						className={ classnames(
+							'block-editor-panel-color-gradient-settings__dropdown',
+							{ 'is-open': isOpen }
+						) }
+					>
+						<HStack justify="flex-start">
+							<ColorIndicator
+								className="block-editor-panel-color-gradient-settings__color-indicator"
+								colorValue={ selectedColor }
+							/>
+							<FlexItem>{ settings.label }</FlexItem>
+						</HStack>
+					</Button>
+				) }
+				renderContent={ () => (
+					<ColorGradientControl
+						showTitle={ false }
+						__experimentalHasMultipleOrigins
+						__experimentalIsRenderedInSidebar
+						enableAlpha
+						{ ...controlSettings }
+					/>
+				) }
+			/>
+		</ToolsPanelItem>
 	);
 }
