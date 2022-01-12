@@ -85,7 +85,7 @@ class Gutenberg_REST_Global_Styles_Controller extends WP_REST_Global_Styles_Cont
 			foreach ( $nested_html_files as $path => $file ) {
 				$decoded_file = wp_json_file_decode( $path, array( 'associative' => true ) );
 				if ( is_array( $decoded_file ) ) {
-					$variations[] = $decoded_file;
+					$variations[] = ( new WP_Theme_JSON( $decoded_file ) )->get_raw_data();
 				}
 			}
 		}
