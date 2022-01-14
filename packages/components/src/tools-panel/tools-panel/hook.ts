@@ -51,6 +51,8 @@ export function useToolsPanel(
 		panelId,
 		hasInnerWrapper,
 		shouldRenderPlaceholderItems,
+		__experimentalFirstVisibleItemClass,
+		__experimentalLastVisibleItemClass,
 		...otherProps
 	} = useContextSystem( props, 'ToolsPanel' );
 
@@ -261,6 +263,8 @@ export function useToolsPanel(
 		shouldRenderPlaceholderItems,
 		firstDisplayedItem: getFirstItem(),
 		lastDisplayedItem: getLastItem(),
+		__experimentalFirstVisibleItemClass,
+		__experimentalLastVisibleItemClass,
 	};
 
 	return {
