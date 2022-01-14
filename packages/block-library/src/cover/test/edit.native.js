@@ -236,7 +236,7 @@ describe( 'when an image is attached', () => {
 		fireEvent.press(
 			getByText( ( attributes.focalPoint.x * 100 ).toString() )
 		);
-		fireEvent.changeText( getByLabelText( 'X-Axis Position' ), '99' );
+		fireEvent.changeText( getByLabelText( 'X–Axis Position' ), '99' );
 		fireEvent.press( getByLabelText( 'Apply' ) );
 
 		expect( setAttributes ).toHaveBeenCalledWith(
@@ -260,7 +260,7 @@ describe( 'when an image is attached', () => {
 		fireEvent.press(
 			getByText( ( attributes.focalPoint.x * 100 ).toString() )
 		);
-		fireEvent.changeText( getByLabelText( 'X-Axis Position' ), '80' );
+		fireEvent.changeText( getByLabelText( 'X–Axis Position' ), '80' );
 		fireEvent.press( getByLabelText( 'Go back' ) );
 
 		expect( setAttributes ).not.toHaveBeenCalledWith(

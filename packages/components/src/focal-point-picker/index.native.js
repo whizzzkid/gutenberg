@@ -253,7 +253,7 @@ function FocalPointPicker( props ) {
 				</View>
 				<UnitControl
 					key={ `xAxis-${ sliderKey }` }
-					label={ __( 'X-Axis Position' ) }
+					label={ __( 'X–Axis Position' ) }
 					max={ MAX_POSITION_VALUE }
 					min={ MIN_POSITION_VALUE }
 					onChange={ onXCoordinateChange }
@@ -263,7 +263,7 @@ function FocalPointPicker( props ) {
 				/>
 				<UnitControl
 					key={ `yAxis-${ sliderKey }` }
-					label={ __( 'Y-Axis Position' ) }
+					label={ __( 'Y–Axis Position' ) }
 					max={ MAX_POSITION_VALUE }
 					min={ MIN_POSITION_VALUE }
 					onChange={ onYCoordinateChange }
